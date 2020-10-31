@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/yh-react-virtuallist%20/static/css/main.afd7172b.chunk.css",
+    "main.js": "/yh-react-virtuallist%20/static/js/main.7f5f42da.chunk.js",
+    "main.js.map": "/yh-react-virtuallist%20/static/js/main.7f5f42da.chunk.js.map",
+    "runtime-main.js": "/yh-react-virtuallist%20/static/js/runtime-main.0d11eabd.js",
+    "runtime-main.js.map": "/yh-react-virtuallist%20/static/js/runtime-main.0d11eabd.js.map",
+    "static/js/2.588e9916.chunk.js": "/yh-react-virtuallist%20/static/js/2.588e9916.chunk.js",
+    "static/js/2.588e9916.chunk.js.map": "/yh-react-virtuallist%20/static/js/2.588e9916.chunk.js.map",
+    "static/js/3.e4a71a03.chunk.js": "/yh-react-virtuallist%20/static/js/3.e4a71a03.chunk.js",
+    "static/js/3.e4a71a03.chunk.js.map": "/yh-react-virtuallist%20/static/js/3.e4a71a03.chunk.js.map",
+    "index.html": "/yh-react-virtuallist%20/index.html",
+    "static/css/main.afd7172b.chunk.css.map": "/yh-react-virtuallist%20/static/css/main.afd7172b.chunk.css.map",
+    "static/js/2.588e9916.chunk.js.LICENSE.txt": "/yh-react-virtuallist%20/static/js/2.588e9916.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0d11eabd.js",
+    "static/js/2.588e9916.chunk.js",
+    "static/css/main.afd7172b.chunk.css",
+    "static/js/main.7f5f42da.chunk.js"
+  ]
+}
