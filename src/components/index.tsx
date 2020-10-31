@@ -1,5 +1,5 @@
 import React, {
-	DOMAttributes,
+	AllHTMLAttributes,
 	PropsWithChildren,
 	ReactChildren,
 	RefObject,
@@ -25,7 +25,7 @@ function arrayResolve<R>(
 	}
 }
 
-export interface VirtualListProps extends DOMAttributes<HTMLDivElement> {
+export interface VirtualListProps extends AllHTMLAttributes<HTMLDivElement> {
 	//滚动dom的ref
 	scrollDom: RefObject<HTMLDivElement>;
 	//每个元素的高度

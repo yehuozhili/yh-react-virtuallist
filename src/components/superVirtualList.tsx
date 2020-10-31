@@ -1,5 +1,5 @@
 import React, {
-	DOMAttributes,
+	AllHTMLAttributes,
 	PropsWithChildren,
 	ReactElement,
 	RefObject,
@@ -24,7 +24,7 @@ function arrayResolve<R>(
 	}
 }
 
-export interface VirtualListProps extends DOMAttributes<HTMLDivElement> {
+export interface VirtualListProps extends AllHTMLAttributes<HTMLDivElement> {
 	scrollDom: RefObject<HTMLDivElement>;
 	referItemHeight: number;
 	renderNumber: number;
@@ -269,6 +269,7 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 				}}
 			>
 				{renderChildren}
+				<div style={{ height: "1px" }}></div>
 			</div>
 		</div>
 	);
