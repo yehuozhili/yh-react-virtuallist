@@ -9,7 +9,7 @@ function SuperDemo(props: { scrollDom: RefObject<HTMLDivElement> }) {
 			<div>
 				<SuperVirtualList
 					scrollDom={props.scrollDom}
-					referItemHeight={25}
+					referItemHeight={40}
 					renderNumber={30}
 				>
 					{mockArr.map((v, i) => {
@@ -17,7 +17,7 @@ function SuperDemo(props: { scrollDom: RefObject<HTMLDivElement> }) {
 							<div
 								style={{
 									border: "1px solid black",
-									height: `${Math.random() * 30 + 20}px`,
+									height: `${Math.random() * 50 + 20}px`,
 								}}
 								key={i}
 							>

@@ -184,7 +184,7 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 				Object.values(cache).some((v, i) => {
 					sum = sum + v;
 					if (sum > scroll) {
-						sindex = i;
+						sindex = i + 1; //除非一个元素占一屏幕，否则一般不会有bug
 						return true;
 					}
 					return false;
@@ -277,7 +277,6 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 				}}
 			>
 				{renderChildren}
-				<div style={{ height: "1px" }}></div>
 			</div>
 		</div>
 	);
