@@ -102,9 +102,10 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 	});
 	useEffect(() => {
 		setMockHeight(
-			Object.values(cache).reduce((prev, next) => prev + next, 0)
+			Object.values(cache).reduce((prev, next) => prev + next, 0) -
+				scrollDomParams.height
 		);
-	}, [cache]);
+	}, [cache, scrollDomParams.height]);
 
 	const refData: Record<number, HTMLDivElement> = useMemo(() => {
 		return {};
@@ -147,9 +148,11 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 		) {
 			//map rendernumber
 			new Array(props.renderNumber).fill(1).forEach((x, y) => {
-				const height =
-					refData[y].getBoundingClientRect().height || cache[y];
-				cache[y] = height;
+				if (refData[y]) {
+					const height =
+						refData[y].getBoundingClientRect().height || cache[y];
+					cache[y] = height;
+				}
 			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -166,7 +169,7 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 
 	const maxY = useMemo(() => {
 		//最大值等于mock高减去一屏幕高度
-		return mockHeight - scrollDomParams.height;
+		return mockHeight - scrollDomParams.height - scrollDomParams.height;
 	}, [mockHeight, scrollDomParams.height]);
 	useEffect(() => {
 		let fn: (e: Event) => void;
@@ -174,7 +177,7 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 		if (props.scrollDom.current) {
 			fn = (e: Event) => {
 				const target = e.target as HTMLDivElement;
-				const scroll = target.scrollTop;
+				const scroll = target.scrollTop - scrollDomParams.height;
 				//根据scroll的高度判断滚到第几个位置
 				let sum = 0;
 				let sindex = 0;
@@ -188,9 +191,10 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 				});
 
 				const remain =
-					props.renderNumber + sindex > cloneChildren.length
+					props.renderNumber + sindex + props.renderNumber >
+					cloneChildren.length
 						? cloneChildren.length
-						: props.renderNumber + sindex;
+						: props.renderNumber + props.renderNumber + sindex;
 
 				const start = current.start;
 				if (start < remain && start < cloneChildren.length) {
@@ -207,7 +211,7 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 							Object.values(cache).reduce(
 								(prev, next) => prev + next,
 								0
-							)
+							) - scrollDomParams.height
 						);
 						current.start = remain;
 						//删除start之前的dom
@@ -218,8 +222,11 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 						}
 					});
 				}
-
-				let Y = scroll - wrapperToScrollDomDistance;
+				//减去一屏幕高度
+				let Y =
+					scroll -
+					wrapperToScrollDomDistance -
+					scrollDomParams.height;
 				if (Y < 0) {
 					Y = 0;
 					//最后的scroll 需要减去一屏幕高度
@@ -250,6 +257,7 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 		props.renderNumber,
 		props.scrollDom,
 		refData,
+		scrollDomParams.height,
 		wrapperToScrollDomDistance,
 	]);
 

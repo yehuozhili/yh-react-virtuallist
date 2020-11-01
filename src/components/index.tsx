@@ -85,10 +85,17 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 		return arrayResolve<number>(
 			props.children,
 			(val: any[]) =>
-				val.length * props.itemHeight - wrapperToScrollDomDistance,
+				val.length * props.itemHeight -
+				wrapperToScrollDomDistance -
+				scrollDomParams.height,
 			() => 0
 		);
-	}, [props.children, props.itemHeight, wrapperToScrollDomDistance]);
+	}, [
+		props.children,
+		props.itemHeight,
+		scrollDomParams.height,
+		wrapperToScrollDomDistance,
+	]);
 
 	const [renderChildren, setRenderChildren] = useState(
 		//一开始，需要返回对应截取的元素
@@ -108,25 +115,42 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 		if (props.scrollDom.current) {
 			fn = (e: Event) => {
 				const target = e.target as HTMLDivElement;
-				const scroll = target.scrollTop;
-				const iNumber = Math.floor(scroll / props.itemHeight);
-				let Y = scroll - wrapperToScrollDomDistance;
+				const scroll = target.scrollTop - scrollDomParams.height;
+				const lenth = arrayResolve<number>(
+					props.children,
+					(val: any[]) => val.length,
+					() => 0
+				);
+				let sindex = Math.floor(scroll / props.itemHeight);
+				if (sindex < 0) {
+					sindex = 0;
+				}
+				const remain =
+					props.renderNumber + sindex + props.renderNumber > lenth
+						? lenth
+						: props.renderNumber + props.renderNumber + sindex;
+
+				let Y =
+					scroll -
+					wrapperToScrollDomDistance -
+					scrollDomParams.height;
 				if (Y < 0) {
 					Y = 0;
-					//最后的scroll 需要减去一屏幕高度
-				} else if (Y >= mockHeight - scrollDomParams.height) {
-					Y = mockHeight - scrollDomParams.height;
+				} else if (
+					Y >=
+					mockHeight - scrollDomParams.height - scrollDomParams.height
+				) {
+					Y =
+						mockHeight -
+						scrollDomParams.height -
+						scrollDomParams.height;
 				}
 
 				unstable_batchedUpdates(() => {
 					setRenderChildren(
 						arrayResolve<ReactChildren>(
 							props.children,
-							(val: any[]) =>
-								val.slice(
-									0 + iNumber,
-									props.renderNumber + iNumber
-								),
+							(val: any[]) => val.slice(0 + sindex, remain),
 							() => null
 						)
 					);
@@ -168,6 +192,7 @@ export function VirtualList(props: PropsWithChildren<VirtualListProps>) {
 				}}
 			>
 				{renderChildren}
+				<div style={{ height: "1px" }}></div>
 			</div>
 		</div>
 	);

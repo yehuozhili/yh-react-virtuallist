@@ -15,7 +15,11 @@
 
 ### 快速上手
 
--   VirtualList 是必须指定宽高的。SuperVirtualList 不用指定宽高。
+-   VirtualList 是必须指定高的。SuperVirtualList 不用指定高，但需要给个估算值。
+
+```
+npm i yh-react-virtuallist
+```
 
 ```tsx
 import React, { useRef } from "react";
