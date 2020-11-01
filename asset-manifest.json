@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/yh-react-virtuallist/static/css/main.afd7172b.chunk.css",
-    "main.js": "/yh-react-virtuallist/static/js/main.a3cf04f5.chunk.js",
-    "main.js.map": "/yh-react-virtuallist/static/js/main.a3cf04f5.chunk.js.map",
+    "main.js": "/yh-react-virtuallist/static/js/main.b7b23985.chunk.js",
+    "main.js.map": "/yh-react-virtuallist/static/js/main.b7b23985.chunk.js.map",
     "runtime-main.js": "/yh-react-virtuallist/static/js/runtime-main.b1f8c096.js",
     "runtime-main.js.map": "/yh-react-virtuallist/static/js/runtime-main.b1f8c096.js.map",
     "static/js/2.588e9916.chunk.js": "/yh-react-virtuallist/static/js/2.588e9916.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b1f8c096.js",
     "static/js/2.588e9916.chunk.js",
     "static/css/main.afd7172b.chunk.css",
-    "static/js/main.a3cf04f5.chunk.js"
+    "static/js/main.b7b23985.chunk.js"
   ]
 }
